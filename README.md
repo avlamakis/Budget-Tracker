@@ -50,7 +50,7 @@ npm install mongoose
 
 
 ## Screenshot
-![image](https://user-images.githubusercontent.com/91172337/156904029-ad942274-e702-4e97-b346-70122eee1565.png)
+![image](https://user-images.githubusercontent.com/91172337/158000647-87471e3d-3fdd-4e88-b74f-9b3a89aa3a6a.png)
 
 ## License:
 None
@@ -69,6 +69,8 @@ https://www.npmjs.com/package/express
 https://stackoverflow.com/questions/68958221/mongoparseerror-options-usecreateindex-usefindandmodify-are-not-supported
 
 https://www.mongodb.com/community/forums/t/mongooseserverselectionerror-connect-econnrefused-127-0-0-1-27017/123421/2
+
+Starter code provided by the University of Utah 
 
 
 ## Testing:
