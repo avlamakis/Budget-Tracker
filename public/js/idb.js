@@ -23,3 +23,54 @@ request.onupgradeneeded = function(event) {
   request.onerror = function (event) {
     console.log("Error: " + event.target.errorCode);
   };
+
+  // This function will be executed if we attempt to submit a new budget event and there's no internet connection
+function saveRecord(record) {
+    // open a new transaction with the database with read and write permission
+    const transaction = db.transaction(["new_budget"], "readwrite");
+  
+    // access the object store for "new_budget"
+    const store = transaction.objectStore("new_budget");
+  
+    // add record to your store with add method
+    store.add(record);
+  }
+  
+  function uploadBudget() {
+    // open a transaction on db
+    const transaction = db.transaction(["new_budget"], "readwrite");
+  
+    // access object store
+    const store = transaction.objectStore("new_budget");
+  
+    // get all records from store and set to a variable
+    const getAll = store.getAll();
+  
+    getAll.onsuccess = function () {
+      if (getAll.result.length > 0) {
+        fetch("/api/transaction/bulk", {
+          method: "POST",
+          body: JSON.stringify(getAll.result),
+          headers: {
+            Accept: "application/json, text/plain, */*",
+            "Content-Type": "application/json"
+          }
+        })
+          .then(response => response.json())
+          .then(() => {
+            // delete records if successful
+            const transaction = db.transaction(["new_budget"], "readwrite");
+            const store = transaction.objectStore("new_budget");
+            store.clear();
+          });
+      }
+    };
+  }
+  function deletePending() {
+    const transaction = db.transaction(["new_budget"], "readwrite");
+    const store = transaction.objectStore("new_budget");
+    store.clear();
+  }
+  
+  // listen for app coming back online
+  window.addEventListener("online", uploadBudget);
