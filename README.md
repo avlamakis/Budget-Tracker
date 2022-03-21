@@ -48,6 +48,7 @@ npm install mongoose
 
 ## Usage:
 
+https://avlamakis-budget-tracker.herokuapp.com/
 
 ## Screenshot
 ![image](https://user-images.githubusercontent.com/91172337/158000647-87471e3d-3fdd-4e88-b74f-9b3a89aa3a6a.png)
